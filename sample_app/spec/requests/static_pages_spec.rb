@@ -13,6 +13,19 @@ describe "Static pages" do
     let(:heading)    { 'Sample App' }
     let(:page_title) { '' }
     it { should_not have_selector 'title', text: '| Home' }
+    it "should have the right links on the layout" do
+      click_link "About"
+      it { should have_selector 'title', text: full_title('About') }
+      click_link "Help"
+      it { should 'title', text: full_title('Help') }
+      click_link "Contact"
+      it { should 'title', text: full_title('Contact') }
+      click_link "Home"
+      click_link "Sign up now!"
+      it { should 'title', text: full_title('Sign up') }
+      click_link "sample app"
+      it { should 'title', text: full_title('') }
+    end
   end
 
   describe "Help page" do
